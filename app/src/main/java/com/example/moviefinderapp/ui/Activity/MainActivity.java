@@ -1,68 +1,64 @@
 package com.example.moviefinderapp.ui.Activity;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.MenuItem;
 
-import androidx.annotation.Nullable;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.example.moviefinderapp.databinding.ActivityMainBinding;
-import com.example.moviefinderapp.Network.MovieDto;
-import com.example.moviefinderapp.Network.MoviesResponseDto;
-import com.example.moviefinderapp.Network.OmdbApi;
-import com.example.moviefinderapp.Network.RetrofitClient;
-import com.example.moviefinderapp.ui.Adapter.MoviesAdapter;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import com.example.moviefinderapp.FirstFragment;
+import com.example.moviefinderapp.R;
+import com.example.moviefinderapp.SecondFragment;
+import com.example.moviefinderapp.ThirdFragment;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ActivityMainBinding binding;
+    FirstFragment firstFragment = new FirstFragment();
+    SecondFragment secondFragment = new SecondFragment();
+    ThirdFragment thirdFragment = new ThirdFragment();
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        setContentView(R.layout.activity_main);
 
-        binding.searchButton.setOnClickListener(v -> {
-            String searchQuery = binding.searchQueryText.getText().toString();
-            searchMovie(searchQuery);
-        });
-        binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        binding.recyclerView.setAdapter(new MoviesAdapter(new ArrayList<>()));
+        BottomNavigationView navigation = findViewById(R.id.bottom_navigation);
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
 
-    private void searchMovie(String searchQuery) {
-        OmdbApi service = RetrofitClient.getRetrofitInstance().create(OmdbApi.class);
-        Call<MoviesResponseDto> call = service.getMovies(searchQuery, "a2935151");
+    private final BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            int itemId = item.getItemId();
 
-        call.enqueue(new Callback<MoviesResponseDto>() {
-            @Override
-            public void onResponse(Call<MoviesResponseDto> call, Response<MoviesResponseDto> response) {
-                if (response.isSuccessful()) {
-                    MoviesResponseDto movieDto = response.body();
-
-                    List<MovieDto> movies = response.body().getSearch();
-                    if (movies != null) {
-                        MoviesAdapter adapter = new MoviesAdapter(movies);
-                        binding.recyclerView.setAdapter(adapter);
-                        Log.d("MainActivity", "Movie: " + movieDto);
-                    }
-
-                }
+            if (itemId == R.id.firstFragment) {
+                loadFragment(firstFragment);
+                return true;
+            } else if (itemId == R.id.secondFragment) {
+                loadFragment(secondFragment);
+                return true;
+            } else if (itemId == R.id.thirdFragment) {
+                loadFragment(thirdFragment);
+                return true;
             }
 
-            @Override
-            public void onFailure(Call<MoviesResponseDto> call, Throwable t) {
-                Log.e("MainActivity", "Error: " + t.getMessage(), t);
-            }
-        });
+            return false;
+        }
 
+    };
+
+    public void loadFragment(Fragment fragment){
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.frame_container, fragment);
+        transaction.commit();
     }
+
+
+
+
+
 }

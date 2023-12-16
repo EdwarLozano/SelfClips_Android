@@ -49,12 +49,6 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView navigation = findViewById(R.id.bottom_navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        recyclerView = findViewById(R.id.recycler_view);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        List<String> imageUrls = generateImageUrls(); // Aquí generas una lista de URLs de imágenes aleatorias
-        adapter = new ImageAdapter(imageUrls);
-        recyclerView.setAdapter(adapter);
     }
 
     private final BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -84,13 +78,7 @@ public class MainActivity extends AppCompatActivity {
         transaction.commit();
     }
 
-    private List<String> generateImageUrls() {
-        List<String> urls = new ArrayList<>();
-        for (int i = 0; i < 10; i++) { // Generar 10 URLs para la lista
-            urls.add("https://random.imagecdn.app/500/150");
-        }
-        return urls;
-    }
+
 
 
 

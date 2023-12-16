@@ -3,6 +3,7 @@ package com.example.moviefinderapp.ui.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,5 +24,15 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
+        Button btnregister = findViewById(R.id.login_btn2);
+        btnregister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(RegisterActivity.this, MainActivity.class));
+            }
+        });
+
     }
+
+
 }

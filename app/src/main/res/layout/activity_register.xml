@@ -15,17 +15,18 @@
         android:orientation="vertical">
 
         <ImageView
-            android:layout_width="160dp"
-            android:layout_height="160dp"
-            android:src="@drawable/icon_account"/>
+            android:id="@+id/imageView2"
+            android:layout_width="202dp"
+            android:layout_height="180dp"
+            app:srcCompat="@drawable/whatsapp_image_2023_11_02_at_12_03_10_pm_removebg_preview" />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:hint="Usuario"
-            android:textColor="#E7B5B4"
-            android:textColorHint="#E7B5B4"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
             android:textSize="20sp"
             android:background="@drawable/rounded_corner"
             android:padding="18dp"
@@ -33,17 +34,43 @@
             android:id="@+id/user_input2"/>
 
         <EditText
+            android:id="@+id/email_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:hint="Contraseña"
-            android:textColor="#E7B5B4"
-            android:textColorHint="#E7B5B4"
-            android:textSize="20sp"
             android:background="@drawable/rounded_corner"
+            android:hint="E-mail"
+            android:inputType="textEmailAddress"
             android:padding="18dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/password_input2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/rounded_corner"
+            android:hint="Contraseña"
+            android:inputType="textEmailAddress"
+            android:padding="18dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/passwordconfirm_input2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/rounded_corner"
+            android:hint="Confirma Contraseña"
             android:inputType="textPassword"
-            android:id="@+id/password_input2"/>
+            android:padding="18dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:textSize="20sp" />
 
         <Button
             android:layout_width="match_parent"
@@ -60,7 +87,7 @@
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="Ya tienes una cuenta? Login" />
 
 
     </LinearLayout>

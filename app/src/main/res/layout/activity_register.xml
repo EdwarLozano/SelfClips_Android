@@ -12,7 +12,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="40dp"
+        tools:layout_editor_absoluteY="32dp">
 
         <ImageView
             android:id="@+id/imageView2"
@@ -21,21 +23,21 @@
             app:srcCompat="@drawable/whatsapp_image_2023_11_02_at_12_03_10_pm_removebg_preview" />
 
         <EditText
-            android:layout_width="match_parent"
+            android:id="@+id/user_input2"
+            android:layout_width="342dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
+            android:background="@drawable/rounded_corner"
             android:hint="Usuario"
+            android:inputType="textEmailAddress"
+            android:padding="18dp"
             android:textColor="@color/black"
             android:textColorHint="@color/black"
-            android:textSize="20sp"
-            android:background="@drawable/rounded_corner"
-            android:padding="18dp"
-            android:inputType="textEmailAddress"
-            android:id="@+id/user_input2"/>
+            android:textSize="20sp" />
 
         <EditText
             android:id="@+id/email_input"
-            android:layout_width="match_parent"
+            android:layout_width="333dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:background="@drawable/rounded_corner"
@@ -48,7 +50,7 @@
 
         <EditText
             android:id="@+id/password_input2"
-            android:layout_width="match_parent"
+            android:layout_width="336dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:background="@drawable/rounded_corner"
@@ -61,8 +63,8 @@
 
         <EditText
             android:id="@+id/passwordconfirm_input2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="335dp"
+            android:layout_height="61dp"
             android:layout_marginTop="32dp"
             android:background="@drawable/rounded_corner"
             android:hint="Confirma Contraseña"
@@ -73,15 +75,15 @@
             android:textSize="20sp" />
 
         <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Ingresar"
-            android:backgroundTint="@color/white"
-            android:textColor="@color/black"
-            android:padding="18dp"
+            android:id="@+id/login_btn2"
+            android:layout_width="337dp"
+            android:layout_height="70dp"
             android:layout_marginTop="32dp"
-            android:textSize="20sp"
-            android:id="@+id/login_btn2"/>
+            android:backgroundTint="@color/white"
+            android:padding="18dp"
+            android:text="Ingresar"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/textView2"

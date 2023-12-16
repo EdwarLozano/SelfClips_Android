@@ -14,12 +14,32 @@ import com.example.moviefinderapp.R;
 import com.example.moviefinderapp.SecondFragment;
 import com.example.moviefinderapp.ThirdFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.example.moviefinderapp.R;
+import com.example.moviefinderapp.databinding.ActivityMainBinding;
+import com.example.moviefinderapp.Network.MovieDto;
+import com.example.moviefinderapp.Network.MoviesResponseDto;
+import com.example.moviefinderapp.Network.OmdbApi;
+import com.example.moviefinderapp.Network.RetrofitClient;
+import com.example.moviefinderapp.ui.Adapter.ImageAdapter;
+import com.example.moviefinderapp.ui.Adapter.MoviesAdapter;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+// En tu actividad o fragmento principal
 public class MainActivity extends AppCompatActivity {
 
     FirstFragment firstFragment = new FirstFragment();
     SecondFragment secondFragment = new SecondFragment();
     ThirdFragment thirdFragment = new ThirdFragment();
+    private RecyclerView recyclerView;
+    private ImageAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -3,28 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/search_query_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:hint="Type movie name"
-        android:inputType="text"
-        android:ems="10"/>
-
-    <Button
-        android:id="@+id/search_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/search_query_text"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:text="Search" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/search_button"
         android:layout_marginTop="8dp"/>
 </RelativeLayout>

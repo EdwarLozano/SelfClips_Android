@@ -28,6 +28,7 @@ public class MovieDto {
     }
 
     public void setImdbID(String imdbID) {
+
         this.imdbID = imdbID;
     }
 

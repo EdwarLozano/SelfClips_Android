@@ -6,63 +6,47 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.moviefinderapp.R;
 import com.example.moviefinderapp.databinding.ActivityMainBinding;
 import com.example.moviefinderapp.Network.MovieDto;
 import com.example.moviefinderapp.Network.MoviesResponseDto;
 import com.example.moviefinderapp.Network.OmdbApi;
 import com.example.moviefinderapp.Network.RetrofitClient;
+import com.example.moviefinderapp.ui.Adapter.ImageAdapter;
 import com.example.moviefinderapp.ui.Adapter.MoviesAdapter;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+// En tu actividad o fragmento principal
 public class MainActivity extends AppCompatActivity {
-
-    private ActivityMainBinding binding;
+    private RecyclerView recyclerView;
+    private ImageAdapter adapter;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        setContentView(R.layout.activity_main);
 
-        binding.searchButton.setOnClickListener(v -> {
-            String searchQuery = binding.searchQueryText.getText().toString();
-            searchMovie(searchQuery);
-        });
-        binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        binding.recyclerView.setAdapter(new MoviesAdapter(new ArrayList<>()));
+        recyclerView = findViewById(R.id.recycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        List<String> imageUrls = generateImageUrls(); // Aquí generas una lista de URLs de imágenes aleatorias
+        adapter = new ImageAdapter(imageUrls);
+        recyclerView.setAdapter(adapter);
     }
 
-    private void searchMovie(String searchQuery) {
-        OmdbApi service = RetrofitClient.getRetrofitInstance().create(OmdbApi.class);
-        Call<MoviesResponseDto> call = service.getMovies(searchQuery, "a2935151");
-
-        call.enqueue(new Callback<MoviesResponseDto>() {
-            @Override
-            public void onResponse(Call<MoviesResponseDto> call, Response<MoviesResponseDto> response) {
-                if (response.isSuccessful()) {
-                    MoviesResponseDto movieDto = response.body();
-
-                    List<MovieDto> movies = response.body().getSearch();
-                    if (movies != null) {
-                        MoviesAdapter adapter = new MoviesAdapter(movies);
-                        binding.recyclerView.setAdapter(adapter);
-                        Log.d("MainActivity", "Movie: " + movieDto);
-                    }
-
-                }
-            }
-
-            @Override
-            public void onFailure(Call<MoviesResponseDto> call, Throwable t) {
-                Log.e("MainActivity", "Error: " + t.getMessage(), t);
-            }
-        });
-
+    // Método para generar URLs de imágenes aleatorias
+    private List<String> generateImageUrls() {
+        List<String> urls = new ArrayList<>();
+        for (int i = 0; i < 10; i++) { // Generar 10 URLs para la lista
+            urls.add("https://random.imagecdn.app/500/150");
+        }
+        return urls;
     }
 }
